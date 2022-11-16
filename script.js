@@ -2,6 +2,7 @@ console.log("Hello World!");
 let bg_music = new Audio('music.mp3');
 let audioTurn = new Audio('ting.mp3');
 let gameOver = new Audio('gameover.mp3');
+let isgameover = false; 
 
 let turn = "X";
 
@@ -22,47 +23,14 @@ const checkWin = () => {
         [0,4,8],
         [2,4,6]
     ]
-    let pos = document.getElementsByClassName('box');
-    // 0 1 2
-    if(pos[0].innerText!="" && pos[0].innerText===pos[1].innerText && pos[1].innerText===pos[2].innerText){
-        document.getElementsByClassName("info")[0].innerText = pos[0].innerText + " wins";
-        return true;
-    }
-    // 3 4 5
-    if(pos[3].innerText!="" && pos[3].innerText===pos[4].innerText && pos[4].innerText===pos[5].innerText){
-        document.getElementsByClassName("info")[3].innerText = pos[3].innerText + " wins";
-        return true;
-    }
-    // 6 7 8
-    if(pos[6].innerText!="" && pos[6].innerText===pos[7].innerText && pos[7].innerText===pos[8].innerText){
-        document.getElementsByClassName("info")[6].innerText = pos[6].innerText + " wins";
-        return true;
-    }
-    // 0 3 6 
-    if(pos[0].innerText!="" && pos[0].innerText===pos[3].innerText && pos[3].innerText===pos[6].innerText){
-        document.getElementsByClassName("info")[0].innerText = pos[0].innerText + " wins";
-        return true;
-    }
-    // 1 4 7
-    if(pos[1].innerText!="" && pos[1].innerText===pos[4].innerText && pos[4].innerText===pos[7].innerText){
-        document.getElementsByClassName("info")[1].innerText = pos[1].innerText + " wins";
-        return true;
-    }
-    // 2 5 8
-    if(pos[2].innerText!="" && pos[2].innerText===pos[5].innerText && pos[5].innerText===pos[8].innerText){
-        document.getElementsByClassName("info")[2].innerText = pos[2].innerText + " wins";
-        return true;
-    }
-    // 0 4 8
-    if(pos[0].innerText!="" && pos[0].innerText===pos[4].innerText && pos[4].innerText===pos[8].innerText){
-        document.getElementsByClassName("info")[0].innerText = pos[0].innerText + " wins";
-        return true;
-    }
-    // 2 4 6 
-    if(pos[2].innerText!="" && pos[2].innerText===pos[4].innerText && pos[4].innerText===pos[6].innerText){
-        document.getElementsByClassName("info")[2].innerText = pos[2].innerText + " wins";
-        return true;
-    }
+    let pos = document.getElementsByClassName('box-text');
+    wins.forEach(e=>{
+        if( (pos[e[0]].innerText !=="" ) && (pos[e[0]].innerText === pos[e[1]].innerText) && (pos[e[1]].innerText === pos[e[2]].innerText) ){
+            document.querySelector('.info').innerText = pos[e[0]].innerText + " Won"
+            isgameover = true;
+            document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "block";
+        }
+    })
 }
 
 // Game Logic
@@ -74,10 +42,22 @@ Array.from(boxes).forEach(element=>{
             boxtext.innerText = turn;
             turn = changeTurn();
             audioTurn.play();
-            win = checkWin();
-            if(win===false||win===undefined){
+            checkWin();
+            if(!isgameover){
                 document.getElementsByClassName("info")[0].innerText = "Turn for "+turn;
             }
         }
     });
 });
+
+// reset
+reset = document.querySelector('#reset')
+reset.addEventListener('click',()=>{
+    let boxtexts = document.querySelectorAll('.box-text')
+    Array.from(boxtexts).forEach(element => {
+        element.innerText = ""
+    });
+    turn = "X";
+    isgameover=false;
+    document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "none";
+})

@@ -38,12 +38,32 @@ nav ul{
     cursor: pointer;
 }
 .gameInfo{
-    padding: 32px;
+    padding: 3rem;
 }
-.imgbox img{
+.gif{
     display: none;
+    width: 10rem;
+    height: 10rem;
 }
 
+.gameInfoInside{
+    display: flex;
+    flex-direction: column;
+}
+.info{
+    font-size: 1.5rem;
+    margin: 2rem;
+}
+#reset{
+    width: 5rem;
+    height: 3rem;
+    margin: 2rem;
+    font-size: 1.25rem;
+    overflow: hidden;
+    background: transparent;
+    border: 2px solid #222;
+    border-radius: 0.5rem;
+}
 /* Utility Classes */
 .br-0{
     border-right: 0;
