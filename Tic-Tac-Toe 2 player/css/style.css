@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    background-color: #222;
+    color: whitesmoke;
+    height: 2.5rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0px 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+nav ul{
+    list-style-type: none;
+}
+.gameContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(3,10vw);
+    grid-template-rows: repeat(3,10vw);
+    font-family: 'Roboto';
+}
+.box{
+    border: 1px solid black;
+    font-size: 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box:hover{
+    background-color: rgb(167, 241, 105);
+    cursor: pointer;
+}
+.gameInfo{
+    padding: 3rem;
+}
+.gif{
+    display: none;
+    width: 10rem;
+    height: 10rem;
+}
+
+.gameInfoInside{
+    display: flex;
+    flex-direction: column;
+}
+.info{
+    font-size: 1.5rem;
+    margin: 2rem;
+}
+#reset{
+    width: 5rem;
+    height: 3rem;
+    margin: 2rem;
+    font-size: 1.25rem;
+    overflow: hidden;
+    background: transparent;
+    border: 2px solid #222;
+    border-radius: 0.5rem;
+}
+/* Utility Classes */
+.br-0{
+    border-right: 0;
+}
+.bt-0{
+    border-top: 0;
+}
+.bl-0{
+    border-left: 0;
+}
+.bb-0{
+    border-bottom: 0;
+}
