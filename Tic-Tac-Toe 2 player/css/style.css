@@ -77,3 +77,10 @@ nav ul{
 .bb-0{
     border-bottom: 0;
 }
+.phone{
+    display: grid;
+    grid-template-columns: repeat(3,25vw);
+    grid-template-rows: repeat(3, 25vw);
+    margin: auto;
+    font-family: 'Roboto';
+}

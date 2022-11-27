@@ -3,6 +3,7 @@ let bg_music = new Audio('./audio/music.mp3');
 let audioTurn = new Audio('./audio/ting.mp3');
 let gameOver = new Audio('./audio/gameover.mp3');
 let isgameover = false; 
+let screenWidth = screen.width;
 
 let turn = "X";
 
@@ -29,15 +30,19 @@ const checkWin = () => {
             document.querySelector('.info').innerText = pos[e[0]].innerText + " Won"
             isgameover = true;
             document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "block";
+            let boxes = document.querySelectorAll('.box')
+            boxes[e[0]].style.backgroundColor = "green";
+            boxes[e[1]].style.backgroundColor = "green";
+            boxes[e[2]].style.backgroundColor = "green";
         }
-    })
+    });
 }
 
 // Game Logic
 let boxes = document.getElementsByClassName('box');
 Array.from(boxes).forEach(element=>{
     let boxtext = element.querySelector('.box-text')
-    element.addEventListener('click',()=>{
+    element.addEventListener('click',function clickOnBox(){
         if(boxtext.innerText===''){
             boxtext.innerText = turn;
             turn = changeTurn();
@@ -48,6 +53,10 @@ Array.from(boxes).forEach(element=>{
             }
         }
     });
+    
+    // for (var i = 0; i < cells.length; i++) {
+	// 	cells[i].removeEventListener('click', turnClick, false);
+	// }
 });
 
 // reset
@@ -57,8 +66,20 @@ reset.addEventListener('click',()=>{
     Array.from(boxtexts).forEach(element => {
         element.innerText = ""
     });
+    let box = document.querySelectorAll('.box')
+    Array.from(box).forEach(element => {
+        element.style.backgroundColor = "white"
+    });
     turn = "X";
     isgameover=false;
     document.getElementsByClassName("info")[0].innerText = "Turn for "+turn;
     document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "none";
 })
+
+let container = document.querySelector('#container')
+console.log(container)
+console.log(screenWidth)
+if(screenWidth <= 750 ){
+    container.classList.add('phone')
+    container.classList.remove('container')
+}
