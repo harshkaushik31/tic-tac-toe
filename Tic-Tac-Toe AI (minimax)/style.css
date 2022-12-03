@@ -1,13 +1,13 @@
 :root{
-    background-color: rgba(0,0,0,0.9);
-    color: whitesmoke;
+    /* background-color: rgba(0,0,0,0.9);
+    color: whitesmoke; */
   }
   html, body {
     height: 100%;
     width: 100%;
   }
   td{
-    border: 2px solid whitesmoke;
+    border: 2px solid black;
     height: 7rem;
     width: 7rem;
     text-align: center;
@@ -46,4 +46,11 @@
   }
   .result-p .result{
     margin: 0.5rem 0rem 0.5rem 0rem;
+  }
+  .btn{
+    padding: 1rem 2rem 1rem 2rem;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-top: 1.5rem;
   }
