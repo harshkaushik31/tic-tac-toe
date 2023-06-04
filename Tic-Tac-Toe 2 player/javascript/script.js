@@ -3,7 +3,11 @@ let bg_music = new Audio('./audio/music.mp3');
 let audioTurn = new Audio('./audio/ting.mp3');
 let gameOver = new Audio('./audio/gameover.mp3');
 let isgameover = false; 
+let anyWin = false;
 let screenWidth = screen.width;
+let boardArray = [];
+const emptyArray = [];
+
 
 let turn = "X";
 
@@ -29,6 +33,7 @@ const checkWin = () => {
         if( (pos[e[0]].innerText !=="" ) && (pos[e[0]].innerText === pos[e[1]].innerText) && (pos[e[1]].innerText === pos[e[2]].innerText) ){
             document.querySelector('.info').innerText = pos[e[0]].innerText + " Won"
             isgameover = true;
+            anyWin = true;
             document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "block";
             let boxes = document.querySelectorAll('.box')
             boxes[e[0]].style.backgroundColor = "green";
@@ -37,6 +42,14 @@ const checkWin = () => {
         }
     });
 }
+
+// Coloring all boxes blue
+function colorBoxes(){
+    Array.from(boxes).forEach(element => {
+        element.style.backgroundColor = "lightblue";
+    })
+} 
+
 
 // Game Logic
 let boxes = document.getElementsByClassName('box');
@@ -50,17 +63,19 @@ Array.from(boxes).forEach(element=>{
             checkWin();
             if(!isgameover){
                 document.getElementsByClassName("info")[0].innerText = "Turn for "+turn;
+                boardArray.push(boxtext.innerText);
+                if(boardArray.length == 9 && !anyWin){
+                    document.querySelector('.info').innerText =  " Tie";
+                    document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "block";
+                    colorBoxes();
+                }
             }
         }
     });
-    
-    // for (var i = 0; i < cells.length; i++) {
-	// 	cells[i].removeEventListener('click', turnClick, false);
-	// }
 });
 
 // reset
-reset = document.querySelector('#reset')
+let reset = document.querySelector('#reset')
 reset.addEventListener('click',()=>{
     let boxtexts = document.querySelectorAll('.box-text')
     Array.from(boxtexts).forEach(element => {
@@ -74,11 +89,11 @@ reset.addEventListener('click',()=>{
     isgameover=false;
     document.getElementsByClassName("info")[0].innerText = "Turn for "+turn;
     document.querySelector('.imgbox').getElementsByTagName('img')[0].style.display = "none";
+    anyWin = false;
+    boardArray.length = 0;
 })
 
 let container = document.querySelector('#container')
-console.log(container)
-console.log(screenWidth)
 if(screenWidth <= 750 ){
     container.classList.add('phone')
     container.classList.remove('container')
